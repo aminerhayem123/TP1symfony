@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agence index{% endblock %}
+
+{% block body %}
+ 
+    <h2 class="my-5 text-light bg-secondary ">Les Agences</h2>
+    <table class="table table-secondary table-striped table-hover">
+        <thead>
+            <tr>
+                <th>#ID</th>
+                <th>Nom</th>
+                <th>Telegence</th>
+                <th>Adresse_ville</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agence in agences %}
+            <tr>
+                <td>#{{ agence.id }}</td>
+                <td>{{ agence.nom }}</td>
+                <td>{{ agence.telegence }}</td>
+                <td>{{ agence.adresseVille }}</td>
+                <td class="d-flex">
+                    <a href="{{ path('agence_show', {'id': agence.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('agence_edit', {'id': agence.id}) }}" class="btn btn-warning">edit</a>
+                    {{ include('agence/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('agence_new') }}" class="btn btn-success">Ajouter une Agence</a>
+{% endblock %}
